@@ -24,6 +24,7 @@ namespace ServerlessDemo.Integrations.Functions
 
             await db.UpdateImageThumbnailRelativePathById(model.ThumbnailRelativePath, model.ImageId);
 
+             
             return req.CreateResponse();
         }
 

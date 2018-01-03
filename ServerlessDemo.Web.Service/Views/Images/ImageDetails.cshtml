@@ -1,0 +1,40 @@
+﻿@using ServerlessDemo.Web.Service.ViewModels
+@model ServerlessDemo.Web.Service.ViewModels.ImageDetailsViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@Model.Url" style="width: 100%;"/>
+        </div>
+        <div class="col-md-6">
+            @switch (Model.Allowed)
+            {
+                case true:
+                    {
+                        <p>Image is Allowed</p>
+                        break;
+                    }
+                case false:
+                    {
+                        <p>Image is Banned</p>
+                        break;
+                    }
+                case null:
+                    {
+                        <p>Image is Pending</p>
+                        break;
+                    }
+            }
+            @if (Model.IsAdmin)
+            {
+                <form asp-action="AllowImage" asp-route-id="@Model.Id">
+                    <input type="submit" value="Allow"/>
+                </form>
+                <form asp-action="BanImage" asp-route-id="@Model.Id">
+                    <input type="submit" value="Ban"/>
+                </form>
+            }
+            Comments:<br/>
+        </div>
+    </div>
+</div>

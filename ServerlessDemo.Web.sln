@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerlessDemo.Web.Core", "ServerlessDemo.Web.Core\ServerlessDemo.Web.Core.csproj", "{1DA04D4D-A4E6-4CE0-94A4-C25BD275EF84}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerlessDemo.Web.Service", "ServerlessDemo.Web.Service\ServerlessDemo.Web.Service.csproj", "{E04B1337-CD58-402E-AADC-892161573643}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerlessDemo.Database.Migrator", "ServerlessDemo.Database.Migrator\ServerlessDemo.Database.Migrator.csproj", "{307D7BF9-1334-4A6D-9F8B-38ED562C8DE0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerlessDemo.Integrations.Functions", "ServerlessDemo.Integrations.Functions\ServerlessDemo.Integrations.Functions.csproj", "{BD7622F5-E419-4FCC-B11E-D666E5E9EACD}"
+EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "ServerlessDemo.Integrations.LogicApps.ImageAdded", "ServerlessDemo.Integrations.LogicApps.ImageAdded\ServerlessDemo.Integrations.LogicApps.ImageAdded.deployproj", "{AB6AE158-A54B-4EC6-B9F5-848D81B37E91}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DA04D4D-A4E6-4CE0-94A4-C25BD275EF84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DA04D4D-A4E6-4CE0-94A4-C25BD275EF84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DA04D4D-A4E6-4CE0-94A4-C25BD275EF84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DA04D4D-A4E6-4CE0-94A4-C25BD275EF84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E04B1337-CD58-402E-AADC-892161573643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E04B1337-CD58-402E-AADC-892161573643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E04B1337-CD58-402E-AADC-892161573643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E04B1337-CD58-402E-AADC-892161573643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{307D7BF9-1334-4A6D-9F8B-38ED562C8DE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{307D7BF9-1334-4A6D-9F8B-38ED562C8DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{307D7BF9-1334-4A6D-9F8B-38ED562C8DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{307D7BF9-1334-4A6D-9F8B-38ED562C8DE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD7622F5-E419-4FCC-B11E-D666E5E9EACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD7622F5-E419-4FCC-B11E-D666E5E9EACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD7622F5-E419-4FCC-B11E-D666E5E9EACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD7622F5-E419-4FCC-B11E-D666E5E9EACD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB6AE158-A54B-4EC6-B9F5-848D81B37E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB6AE158-A54B-4EC6-B9F5-848D81B37E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB6AE158-A54B-4EC6-B9F5-848D81B37E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB6AE158-A54B-4EC6-B9F5-848D81B37E91}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {996ECC9B-B4DA-4CB9-8C6A-2AD903096DA0}
+	EndGlobalSection
+EndGlobal

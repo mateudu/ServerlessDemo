@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "logicAppName": {
+      "value": "image-added"
+    },
+    "azureblob_1_accessKey": {
+      "value": "BQpZ/Hkb5GPDiQD9EOiyEN8vIlMD2Z0njLJ47lndLU8dRqTCZ2PkXwqjE3i2uDroaVXlhlf7RTirW5MQyeP7OQ=="
+    },
+    "azureblob_2_accessKey": {
+      "value": "BQpZ/Hkb5GPDiQD9EOiyEN8vIlMD2Z0njLJ47lndLU8dRqTCZ2PkXwqjE3i2uDroaVXlhlf7RTirW5MQyeP7OQ=="
+    }
+  }
+}

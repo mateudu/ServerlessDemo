@@ -85,6 +85,14 @@
       "metadata": {
         "description": "Specify a valid primary/secondary storage account access key."
       }
+    },
+    "office365_1_Connection_Name": {
+      "type": "string",
+      "defaultValue": "office365"
+    },
+    "office365_1_Connection_DisplayName": {
+      "type": "string",
+      "defaultValue": "documents@cloudcooking.pl"
     }
   },
   "variables": {},
@@ -208,6 +216,77 @@
                   "Succeeded"
                 ]
               }
+            },
+            "Condition": {
+              "type": "If",
+              "expression": "@and(equals(body('GetImageMetadata')['adult']['isAdultContent'], false),equals(body('GetImageMetadata')['adult']['isRacyContent'], false))",
+              "actions": {
+                "UpdateImageAllowed": {
+                  "type": "Function",
+                  "inputs": {
+                    "body": {
+                      "ImageId": "@body('GetImageByPath')['ImageId']",
+                      "Allowed": true
+                    },
+                    "function": {
+                      "id": "/subscriptions/e21cae4d-3269-42e3-ac13-ff9cf647c624/resourceGroups/serverlessdemo-rg/providers/Microsoft.Web/sites/FunctionApp20180103125221/functions/UpdateImageAllowed"
+                    }
+                  },
+                  "runAfter": {}
+                }
+              },
+              "runAfter": {
+                "GetImageMetadata": [
+                  "Succeeded"
+                ]
+              },
+              "else": {
+                "actions": {
+                  "UpdateImageAllowed_-_it_is_not_allowed": {
+                    "type": "Function",
+                    "inputs": {
+                      "body": {
+                        "ImageId": "@body('GetImageByPath')['ImageId']",
+                        "Allowed": false
+                      },
+                      "function": {
+                        "id": "/subscriptions/e21cae4d-3269-42e3-ac13-ff9cf647c624/resourceGroups/serverlessdemo-rg/providers/Microsoft.Web/sites/FunctionApp20180103125221/functions/UpdateImageAllowed"
+                      }
+                    },
+                    "runAfter": {}
+                  },
+                  "Send_an_email": {
+                    "type": "ApiConnection",
+                    "inputs": {
+                      "host": {
+                        "connection": {
+                          "name": "@parameters('$connections')['office365']['connectionId']"
+                        }
+                      },
+                      "method": "post",
+                      "path": "/Mail",
+                      "body": {
+                        "To": "mateusz.dudek@cloudcooking.pl",
+                        "Subject": "Forbidden image uploaded",
+                        "Body": "Hi Admins!\nUser @{body('GetImageByPath')['OwnerUpn']} has uploaded forbidden content. Check it using provided URL:\nhttps://serverlessdemo.azurewebsites.net/images/@{body('GetImageByPath')['ImageId']}\nRegards,\nOffice365 Service Account",
+                        "Attachments": [
+                          {
+                            "Name": "Image.jpg",
+                            "ContentBytes": "@{base64(body('Get_blob_content'))}"
+                          }
+                        ],
+                        "Importance": "High",
+                        "IsHtml": false
+                      }
+                    },
+                    "runAfter": {
+                      "UpdateImageAllowed_-_it_is_not_allowed": [
+                        "Succeeded"
+                      ]
+                    }
+                  }
+                }
+              }
             }
           },
           "parameters": {
@@ -252,13 +331,19 @@
                 "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', parameters('logicAppLocation'), '/managedApis/', 'azureblob')]",
                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('azureblob_2_Connection_Name'))]",
                 "connectionName": "[parameters('azureblob_2_Connection_Name')]"
+              },
+              "office365": {
+                "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', parameters('logicAppLocation'), '/managedApis/', 'office365')]",
+                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('office365_1_Connection_Name'))]",
+                "connectionName": "[parameters('office365_1_Connection_Name')]"
               }
             }
           }
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/connections', parameters('azureblob_2_Connection_Name'))]"
+        "[resourceId('Microsoft.Web/connections', parameters('azureblob_2_Connection_Name'))]",
+        "[resourceId('Microsoft.Web/connections', parameters('office365_1_Connection_Name'))]"
       ]
     },
     {
@@ -291,6 +376,18 @@
           "accountName": "[parameters('azureblob_2_accountName')]",
           "accessKey": "[parameters('azureblob_2_accessKey')]"
         }
+      }
+    },
+    {
+      "type": "MICROSOFT.WEB/CONNECTIONS",
+      "apiVersion": "2016-06-01",
+      "name": "[parameters('office365_1_Connection_Name')]",
+      "location": "[parameters('logicAppLocation')]",
+      "properties": {
+        "api": {
+          "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', parameters('logicAppLocation'), '/managedApis/', 'office365')]"
+        },
+        "displayName": "[parameters('office365_1_Connection_DisplayName')]"
       }
     }
   ],

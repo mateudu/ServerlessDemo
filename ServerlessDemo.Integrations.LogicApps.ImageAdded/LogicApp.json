@@ -165,7 +165,7 @@
                   "folderPath": "/thumbnails",
                   "name": "@triggerBody()?['Name']"
                 },
-                "body": "@base64toBinary(body('GenerateThumbnail')['Bytes'])"
+                "body": "@base64toBinary(body('GenerateThumbnail'))"
               },
               "runAfter": {
                 "GenerateThumbnail": [
